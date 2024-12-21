@@ -1,10 +1,5 @@
-Поднять vm
-```
-vagrant up
-```
+## IaC 2024, ITMO
 
-Запустить плейбук
+[lab1](lab1/README.md) - запуск приложения с помощью ansible
 
-```
-ansible-playbook playbook.yml -i hosts.ini   
-```
+[lab2](lab2/README.md) - создание docker роли
