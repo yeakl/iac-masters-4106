@@ -2,6 +2,11 @@
 ```
 vagrant up
 ```
+Установить docker роль
+
+```
+ansible-galaxy install -r requirements.yml
+```
 
 Запустить плейбук
 
