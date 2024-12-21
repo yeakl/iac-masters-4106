@@ -1,4 +1,11 @@
+Действия производить из корневой папки!
+
+```
+cd ..
+```
+
 Поднять vm
+
 ```
 vagrant up
 ```
@@ -6,5 +13,5 @@ vagrant up
 Запустить плейбук
 
 ```
-ansible-playbook playbook.yml -i hosts.ini   
+ansible-playbook lab1/playbook.yml -i hosts.ini   
 ```

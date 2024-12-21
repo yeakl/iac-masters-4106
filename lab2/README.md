@@ -1,3 +1,9 @@
+Команды выполнять из корневой папки!
+
+```
+cd ..
+```
+
 Поднять vm
 ```
 vagrant up
@@ -5,11 +11,11 @@ vagrant up
 Установить docker роль
 
 ```
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r lab2/requirements.yml
 ```
 
 Запустить плейбук
 
 ```
-ansible-playbook playbook.yml -i hosts.ini   
+ansible-playbook lab2/playbook.yml -i hosts.ini   
 ```
