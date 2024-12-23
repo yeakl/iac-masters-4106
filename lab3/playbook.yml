@@ -1,0 +1,52 @@
+---
+- name: App setup
+  hosts: app
+  become: true
+  roles: 
+    - docker
+  tasks:
+  - name: Run image
+    community.docker.docker_container:
+      name: app
+      image: timurbabs/django
+      ports:
+        - "8000:8000"
+      detach: true
+      restart_policy: unless-stopped
+
+- name: Web setup
+  hosts: web
+  become: true
+  roles:
+    - nginx
+  vars:
+    nginx_conf_extra_http_options: |
+      upstream app_servers {
+        server 192.168.56.202:8000;
+        server 192.168.56.203:8000;
+      }
+
+  tasks:
+    - name: Copy Nginx default configuration file
+      copy:
+        src: default.conf
+        dest: /etc/nginx/conf.d/default.conf
+        owner: root
+        group: root
+        mode: '0755'
+        validate: 'nginx -t'
+      notify: 
+      - Reload nginx
+
+    - name: Clone app repository
+      ansible.builtin.git:
+        repo: https://github.com/mdn/django-locallibrary-tutorial.git
+        dest: "/home/{{ ansible_user }}/django-app"
+        version: main
+
+    - name: Copy static dir
+      ansible.builtin.copy:
+        src: "/home/{{ ansible_user }}/django-app/catalog/static"
+        remote_src: true
+        dest: /var/www/public
+        mode: "0755"
