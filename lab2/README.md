@@ -1,3 +1,7 @@
+## Лабораторная №2
+
+[Docker-роль](https://gitlab.com/yeklalex-k/ansible-roles/ansible-role-docker)
+
 Команды выполнять из корневой папки!
 
 ```
