@@ -4,4 +4,6 @@
 
 [lab2](lab2/README.md) - создание docker роли
 
-[lab3](lab3/README.md) - создание nginx роли, работа с шаблонизацией конфигурации
+[lab3](lab3/README.md) - создание nginx роли, работа с шаблонизацией конфигурации 
+
+[lab4](lab4/README.md) - создание openvpn роли, работа с molecule
