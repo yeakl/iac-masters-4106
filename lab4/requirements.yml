@@ -1,0 +1,4 @@
+
+- name: openvpn
+  src: git+https://gitlab.com/yeklalex-k/ansible-roles/anisble-role-openvpn.git
+  version: 1.0.0
