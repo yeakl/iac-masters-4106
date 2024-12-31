@@ -7,3 +7,5 @@
 [lab3](lab3/README.md) - создание nginx роли, работа с шаблонизацией конфигурации 
 
 [lab4](lab4/README.md) - создание openvpn роли, работа с molecule
+
+[lab5](lab5/README.md) - создание postgresql роли, inventories

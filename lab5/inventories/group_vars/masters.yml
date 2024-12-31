@@ -1,0 +1,8 @@
+postgresql_role: master
+ansible_distribution_release: focal
+postgresql_master_address: 192.168.56.201
+postgresql_replication_settings:
+  - { key: "wal_level", value: "replica" }
+  - { key: "max_wal_senders", value: "10" }
+  - { key: "max_replication_slots", value: "10" }
+  - { key: "wal_keep_size", value: "16MB" }
