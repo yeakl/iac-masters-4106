@@ -30,6 +30,6 @@
         mode: '0777'
       
     - name: Run app
-      shell: "nohup ./gradlew :bootRun > app.log 2>&1 &"
+      ansible.builtin.shell: "nohup ./gradlew :bootRun > app.log 2>&1 &"
       args:
         chdir: "{{ app_workdir }}"

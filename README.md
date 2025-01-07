@@ -10,4 +10,4 @@
 
 [lab5](lab5/README.md) - создание postgresql роли, inventories
 
-[lab6](lab6/README.md) 
+[lab6](lab6/README.md) - мониторинг приложений
