@@ -9,3 +9,5 @@
 [lab4](lab4/README.md) - создание openvpn роли, работа с molecule
 
 [lab5](lab5/README.md) - создание postgresql роли, inventories
+
+[lab6](lab6/README.md) 

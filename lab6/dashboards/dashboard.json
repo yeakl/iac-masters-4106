@@ -1,0 +1,61 @@
+{
+  "editable": true,
+  "id": null,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "expr": "avg(jvm_memory_used_bytes)",
+          "interval": "",
+          "legendFormat": "JVM memory"
+        }
+      ],
+      "title": "JVM memory",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "expr": "sum by() (irate(http_server_requests_seconds_count[$__interval]))",
+          "legendFormat": "Http rate",
+          "interval": ""
+        }
+      ],
+      "title": "HTTP Requests Rate",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 40,
+  "templating": {
+    "list": []
+  },
+  "title": "App Dashboard",
+  "uid": "app-dashboard",
+  "version": 1
+}

@@ -1,0 +1,2 @@
+app_workdir: /opt/demo-app
+app_repo_url: https://github.com/grafana/spring-boot-demo

@@ -1,0 +1,98 @@
+prometheus_metrics_path: /actuator/prometheus
+prometheus_targets: ["192.168.56.202:1235"]
+
+prometheus_scrape_config:
+  - job_name: "prometheus"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: ["192.168.56.202:1235"]
+
+grafana_datasources:
+  - name: Prometheus
+    type: prometheus
+    url: "http://localhost:9090"
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      prometheusVersion: "2.44.0"
+  - name: Loki
+    type: loki
+    url: "http://localhost:3100"
+
+grafana_config:
+  smtp:
+    enabled: true
+    host: localhost:25
+
+grafana_alert_emails: ["yeklalex@gmail.com"]
+
+grafana_dashboards:
+  - filePath: dashboard.json
+    overwrite: true
+
+grafana_alerting_groups:
+  - orgId: 1
+    name: Every 10 min
+    folder: alerts
+    interval: 10m
+    rules: 
+    - uid: ae9ajlt1qi3ggf
+      title: Memory alert
+      condition: C
+      data:
+        - refId: A 
+          uid: uid_a
+          relativeTimeRange:
+            from: 600
+            to: 0
+          model:
+            datasource:
+                type: prometheus
+            expr: max(jvm_memory_max_bytes / 1000000)
+            intervalMs: 1000
+            legendFormat: Memory alert
+            maxDataPoints: 43200
+            range: false
+            refId: A
+        - refId: C
+          datasourceUid: __expr__
+          uid: uid_c
+          model:
+            conditions:
+                - evaluator:
+                    params:
+                        - 300
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                        - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+            datasource:
+                type: __expr__
+                uid: __expr__
+            expression: A
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: C
+            type: threshold
+      execErrState: Error
+      for: 10m
+      isPaused: false
+      notification_settings:
+        receiver: Send alerts to emails
+
+grafana_contact_points:
+  - orgId: 1
+    name: Send alerts to emails
+    receivers:
+      - uid: first_uid
+        type: email
+        settings:
+          addresses: "{{ grafana_alert_emails | join(',')}}"
+          singleEmail: false
+          subject: Alerting!

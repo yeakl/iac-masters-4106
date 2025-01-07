@@ -1,0 +1,35 @@
+---
+- name: Setup monitoring
+  hosts: monitoring
+  become: true
+  roles:
+    - prometheus
+    - grafana
+    - loki
+
+- name: Setup app
+  hosts: app
+  become: true
+  tasks:
+    - name: Install deps
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - default-jre
+          - gradle
+        state: present
+      
+    - name: Clone app repo
+      ansible.builtin.git:
+        repo: "{{ app_repo_url }}"
+        dest: "{{ app_workdir }}"
+        
+    - name: Ensure gradlew is executable
+      ansible.builtin.file:
+        path: "{{ app_workdir }}/gradlew"
+        mode: '0777'
+      
+    - name: Run app
+      shell: "nohup ./gradlew :bootRun > app.log 2>&1 &"
+      args:
+        chdir: "{{ app_workdir }}"

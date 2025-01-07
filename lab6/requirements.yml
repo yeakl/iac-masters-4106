@@ -1,0 +1,10 @@
+---
+- name: prometheus
+  src: git+https://gitlab.com/yeklalex-k/ansible-roles/ansible-role-prometheus.git
+  version: main
+- name: grafana
+  src: git+https://gitlab.com/yeklalex-k/ansible-roles/ansible-role-grafana.git
+  version: main
+- name: loki
+  src: git+https://gitlab.com/yeklalex-k/ansible-roles/ansible-role-loki.git
+  version: main
